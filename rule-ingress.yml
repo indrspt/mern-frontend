@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: mern-frontend
+  namespace: production
+  annotations:
+
+    ## Untuk menaikan batas upload file
+    nginx.org/client-max-body-size: "10m"
+    ## Memaksa jalan di https
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+
+spec:
+  rules:
+  - host: frontend.aiueocacicuceco.site
+    http:
+      paths:
+      #- path: /belajar
+      - backend:
+          serviceName: mern-frontend
+          servicePort: 3000
